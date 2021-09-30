@@ -1,0 +1,25 @@
+version: "3"
+services:
+  database:
+    image: mariadb
+    container_name : database
+    ports:
+      - 3306:3306
+    command:
+      - --character-set-server=utf8mb4      # 인코딩
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: qwe123!@#
+      MYSQL_DATABASE : teamfresh
+  application:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/teamfresh?useUnicode=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: qwe123!@#
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - database
