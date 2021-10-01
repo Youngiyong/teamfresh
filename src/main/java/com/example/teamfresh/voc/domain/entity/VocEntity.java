@@ -13,18 +13,22 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "vocs")
+@Table(name = "voc")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VocEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "reparation_id", nullable = false)
-    private int reparation_id;
+    @Column(name = "delivery_id", nullable = false)
+    private Long deliveryId;
+
+    @Column(name = "type", nullable = false)
+    private String type;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -33,11 +37,8 @@ public class VocEntity {
     @Column(name = "reason", nullable = false, length = 100)
     private String reason;
 
-    @Column(name = "is_claim", nullable = false, length = 1)
-    private String isClaim;
-
-    @OneToMany(mappedBy = "voc_claim")
-    private List<VocClaimEntity> vocClaim = new ArrayList<>();
+    @Column(name = "is_claim", nullable = false)
+    private Short isClaim;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)
@@ -50,59 +51,65 @@ public class VocEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @Builder
-    public VocEntity(int reparation_id, String reason, VocStatus status) {
-        this.reparation_id = reparation_id;
-        this.reason = reason;
-        setStatus(status);
-    }
+    @OneToMany(mappedBy = "vocId")
+    private List<VocClaimEntity> vocClam = new ArrayList<>();
 
-    private void setStatus(final VocStatus status) {
-        switch (status) {
-            case RECEIVE:
-                receive();
-                break;
-            case APPROVE:
-                approve();
-                break;
-            case PROCEED:
-                proceed();
-                break;
-            case CANCEL:
-                cancel();
-                break;
-            case COMPLETE:
-                complete();
-                break;
-            case HOLD:
-                hold();
-                break;
-            default:
-                throw new IllegalArgumentException(status.name() + " is not found");
-        }
-    }
+    @OneToMany(mappedBy = "vocId")
+    private List<VocReparationEntity> vocReparation = new ArrayList<>();
 
-    private void approve() {
-        this.status = VocStatus.APPROVE;
-    }
-
-    private void proceed() {
-        this.status = VocStatus.PROCEED;
-    }
-
-    private void cancel() {
-        this.status = VocStatus.CANCEL;
-    }
-
-    private void receive() {
-        this.status = VocStatus.RECEIVE;
-    }
-
-    private void complete() {
-        this.status = VocStatus.COMPLETE;
-    }
-
-    private void hold() {
-        this.status = VocStatus.HOLD;
-    }
+//    @Builder
+//    public VocEntity(Long deliveryId, String reason, String type) {
+//        this.deliveryId = deliveryId;
+//        this.reason = reason;
+//        this.type = type;
+//    }
+//
+//    private void setStatus(final VocStatus status) {
+//        switch (status) {
+//            case RECEIVE:
+//                receive();
+//                break;
+//            case APPROVE:
+//                approve();
+//                break;
+//            case PROCEED:
+//                proceed();
+//                break;
+//            case CANCEL:
+//                cancel();
+//                break;
+//            case COMPLETE:
+//                complete();
+//                break;
+//            case HOLD:
+//                hold();
+//                break;
+//            default:
+//                throw new IllegalArgumentException(status.name() + " is not found");
+//        }
+//    }
+//
+//    private void approve() {
+//        this.status = VocStatus.APPROVE;
+//    }
+//
+//    private void proceed() {
+//        this.status = VocStatus.PROCEED;
+//    }
+//
+//    private void cancel() {
+//        this.status = VocStatus.CANCEL;
+//    }
+//
+//    private void receive() {
+//        this.status = VocStatus.RECEIVE;
+//    }
+//
+//    private void complete() {
+//        this.status = VocStatus.COMPLETE;
+//    }
+//
+//    private void hold() {
+//        this.status = VocStatus.HOLD;
+//    }
 }

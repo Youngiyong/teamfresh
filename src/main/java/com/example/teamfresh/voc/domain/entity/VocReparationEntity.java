@@ -1,6 +1,5 @@
 package com.example.teamfresh.voc.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,11 +8,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "voc_claim")
+@Table(name = "voc_reparation")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VocClaimEntity {
+public class VocReparationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,11 +21,14 @@ public class VocClaimEntity {
     @JoinColumn(name="voc_id" , insertable = false , updatable = false)
     private Long vocId;
 
-    @Column(name = "claim_price", nullable = false)
-    private int claimPrice;
+    @Column(name = "name", nullable = true, length = 50)
+    private String name;
 
-    @Column(name = "is_sign", nullable = false)
-    private int isSign;
+    @Column(name = "phone", nullable = true, length = 20)
+    private String phone;
+
+    @Column(name = "reason", nullable = true, length = 255)
+    private String reason;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)
@@ -36,8 +38,13 @@ public class VocClaimEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public VocClaimEntity(Long vocId, int claimPrice) {
-        this.vocId = vocId;
-        this.claimPrice = claimPrice;
-    }
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+
+//    public VocReparationEntity(String name, String phone, String reason) {
+//        this.name = name;
+//        this.phone = phone;
+//        this.reason = reason;
+//    }
 }

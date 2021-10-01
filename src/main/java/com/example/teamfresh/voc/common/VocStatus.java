@@ -7,6 +7,7 @@ public enum VocStatus {
     HOLD(340),
     COMPLETE(350),
     CANCEL(360);
+
     private int value;
 
     private VocStatus(int value) {
