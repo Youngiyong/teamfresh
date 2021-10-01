@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "voc_claim")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class VocClaimEntity {
@@ -25,19 +26,13 @@ public class VocClaimEntity {
     @Column(name = "claim_price", nullable = false)
     private int claimPrice;
 
-    @Column(name = "is_sign", nullable = false)
+    @Column(name = "is_sign", nullable = false, insertable = false)
     private int isSign;
 
-    @CreatedDate
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public VocClaimEntity(Long vocId, int claimPrice) {
-        this.vocId = vocId;
-        this.claimPrice = claimPrice;
-    }
 }

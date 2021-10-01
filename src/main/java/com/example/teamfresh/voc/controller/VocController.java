@@ -9,36 +9,50 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import javax.validation.Valid;
 
 
+@RequestMapping("vocs")
 @RestController
 public class VocController {
 
     @Autowired
     private VocService vocService;
 
-    @Operation(summary = "test hello", description = "hello api example")
+    @Operation(description = "Post Voc")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "OK !!"),
-            @ApiResponse(responseCode = "400", description = "BAD REQUEST !!"),
-            @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
-            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
+            @ApiResponse(responseCode = "201", description = "Success Create"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "500", description = "Internal Error")
     })
-    @PostMapping("/vocs/")
-    public VocDto.Response createVoc(VocDto.RequestVoc payload){
-        VocEntity voc = new VocEntity();
-        voc.setDeliveryId(payload.getDeliveryId());
-        voc.setReason(payload.getReason());
-
-        vocService.save(voc);
-        return new VocDto.Response(voc,200, "success");
+    @PostMapping("")
+    public VocDto.CreateResponse CreateVoc(@RequestBody @Valid final VocDto.RequestVoc payload){
+        return new VocDto.CreateResponse(vocService.save(payload),201, "success");
     }
 
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @Operation(description = "Post VocClaim")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Success Create"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "500", description = "Internal Error")
+    })
+    @PostMapping("/claims")
+    public VocDto.CreateResponse CreateVocClaim(@RequestBody @Valid final VocDto.RequestVocClaim payload){
+        return new VocDto.CreateResponse(vocService.saveClaim(payload),201, "success");
+    }
+
+    @Operation(description = "Get Voc")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Success Create"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "500", description = "Internal Error")
+    })
+    @GetMapping("/{id}")
+    public VocDto.ResponseVoc GetVoc(@PathVariable final long id){
+        return new VocDto.ResponseVoc(vocService.get(id));
+    }
 //    @ResponseStatus(value = HttpStatus.OK)
 //    public DeliveryDto.Res getDelivery(@PathVariable final long id) {
 //        return new DeliveryDto.Res(deliveryService.findById(id));

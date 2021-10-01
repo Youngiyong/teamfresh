@@ -21,15 +21,17 @@ public class VocDto {
             private String reason;
         }
         @Getter
-        @Setter
         public static class RequestVoc {
             @ApiParam(value = "배송 아이디", required = true, example = "501234")
+            @NotEmpty
             private Long deliveryId;
 
             @ApiParam(value = "배송사", required = true, example = "DRIVER/CUSTOMER")
+            @NotEmpty
             private String type;
 
             @ApiParam(value = "귀책 사유", required = true, example = "귀책 사유 예시")
+            @NotEmpty
             private String reason;
 
             @ApiParam(value = "이름", required = false, example = "윤기용")
@@ -40,11 +42,26 @@ public class VocDto {
         }
 
         @Getter
+        public static class RequestVocClaim {
+            @ApiParam(value = "voc id", required = true, example = "501234")
+            private Long vocId;
+            @ApiParam(value = "청구 금액", required = true, example = "5000")
+            private int claimPrice;
+        }
+
+        @Getter
         @AllArgsConstructor
-        public static class Response {
-            private VocEntity voc;
+        public static class CreateResponse {
+            @ApiParam(value = "id", example = "01092069357")
+            private Long id;
             private int returnCode;
             private String returnMessage;
         }
 
+        @Getter
+        @AllArgsConstructor
+        public static class ResponseVoc {
+            @ApiParam(value = "청구 금액", required = true, example = "5000")
+            private VocEntity voc;
+        }
 }

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "voc_reparation")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class VocReparationEntity {
@@ -30,21 +31,13 @@ public class VocReparationEntity {
     @Column(name = "reason", nullable = true, length = 255)
     private String reason;
 
-    @CreatedDate
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at")
+    @Column(name = "deleted_at", insertable = false)
     private LocalDateTime deletedAt;
 
-
-//    public VocReparationEntity(String name, String phone, String reason) {
-//        this.name = name;
-//        this.phone = phone;
-//        this.reason = reason;
-//    }
 }

@@ -30,25 +30,24 @@ public class VocEntity {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private VocStatus status;
+    @Column(name = "status", insertable = false)
+    private String status;
 
-    @Column(name = "reason", nullable = false, length = 100)
+    @Column(name = "reason", nullable = false, length = 255)
     private String reason;
 
-    @Column(name = "is_claim", nullable = false)
+    @Column(name = "is_claim", insertable = false)
     private Short isClaim;
 
     @CreatedDate
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at")
+    @Column(name = "deleted_at", insertable = false)
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "vocId")
