@@ -34,3 +34,6 @@ CREATE TABLE `voc_reparation` (
                                   `deleted_at` datetime DEFAULT null COMMENT '삭제 일자',
                                   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
