@@ -5,6 +5,9 @@ import com.example.teamfresh.voc.domain.entity.VocEntity;
 import com.example.teamfresh.voc.dto.VocDto;
 import com.example.teamfresh.voc.service.VocService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +16,19 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("vocs")
 public class VocController {
 
     @Autowired
     private VocService vocService;
 
-    @ApiOperation(value="Voc 등록")
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.CREATED)
+    @Operation(summary = "test hello", description = "hello api example")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK !!"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST !!"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
+    })
+    @PostMapping("/vocs/")
     public VocDto.Response createVoc(VocDto.RequestVoc payload){
         VocEntity voc = new VocEntity();
         voc.setDeliveryId(payload.getDeliveryId());
