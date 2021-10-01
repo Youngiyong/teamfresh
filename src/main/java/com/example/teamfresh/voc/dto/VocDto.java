@@ -1,25 +1,18 @@
 package com.example.teamfresh.voc.dto;
 
-import com.example.teamfresh.voc.common.VocStatus;
-import com.example.teamfresh.voc.domain.entity.VocClaimEntity;
 import com.example.teamfresh.voc.domain.entity.VocEntity;
-import io.swagger.annotations.Api;
+import com.example.teamfresh.voc.domain.entity.VocReparationEntity;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 
-import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 
 public class VocDto {
 
-        @Getter
-        @AllArgsConstructor
-        @Builder
-        public static class Voc {
-            private Long id;
-            private String reason;
-        }
         @Getter
         public static class RequestVoc {
             @ApiParam(value = "배송 아이디", required = true, example = "501234")
@@ -30,29 +23,66 @@ public class VocDto {
             @NotEmpty
             private String type;
 
-            @ApiParam(value = "귀책 사유", required = true, example = "귀책 사유 예시")
+            @ApiParam(value = "귀책 작성자", required = true, example = "윤기용")
             @NotEmpty
-            private String reason;
-
-            @ApiParam(value = "이름", required = false, example = "윤기용")
+            @NotBlank
             private String name;
 
-            @ApiParam(value = "전화번호", required = false, example = "01092069357")
-            private String phone;
+            @ApiParam(value = "귀책 내용", required = true, example = "귀책 내용입니다.")
+            @NotEmpty
+            @NotBlank
+            private String description;
         }
 
         @Getter
-        public static class RequestVocClaim {
+        public static class RequestVocPenalty {
             @ApiParam(value = "voc id", required = true, example = "501234")
             private Long vocId;
-            @ApiParam(value = "청구 금액", required = true, example = "5000")
-            private int claimPrice;
         }
+
+        @Getter
+        public static class RequestVocPenaltyUpdate {
+            @ApiParam(value = "확인 여부", required = true, example = "1")
+            private int isVerify;
+            @ApiParam(value = "이의 여부", required = true, example = "1")
+            private int isSign;
+       }
+
+        @Getter
+        public static class RequestVocReparation {
+            @ApiParam(value = "voc id", required = true, example = "501234")
+            @NotEmpty
+            @NotBlank
+            private Long vocId;
+
+            @ApiParam(value = "배상 책임자", required = true, example = "DRIVER/CUSTOMER")
+            @NotEmpty
+            @NotBlank
+            private String name;
+
+            @ApiParam(value = "배상 이유", required = true, example = "배상 이유입니다.")
+            @NotEmpty
+            @NotBlank
+            private String reason;
+
+            @ApiParam(value = "배상 금액", required = true, example = "5000")
+            @NotEmpty
+            @NotBlank
+            private int penaltyPrice;
+        }
+
+//        @Getter
+//        public static class RequestUpdateVocPenalties {
+//            @ApiParam(value = "할인 여부", required = false, example = "1")
+//            private int isVerify;
+//
+//            @ApiParam(value = "승인 여부", required = false, example = "1")
+//            private int isSign;
+//        }
 
         @Getter
         @AllArgsConstructor
-        public static class CreateResponse {
-            @ApiParam(value = "id", example = "01092069357")
+        public static class ResponseUpdate {
             private Long id;
             private int returnCode;
             private String returnMessage;
@@ -60,8 +90,33 @@ public class VocDto {
 
         @Getter
         @AllArgsConstructor
+        public static class ResponseCreate {
+            private Long id;
+            private int returnCode;
+            private String returnMessage;
+        }
+
+        @Getter
+        @AllArgsConstructor
+        public static class ResponseListVoc {
+            private List<VocEntity> data;
+        }
+
+        @Getter
+        @AllArgsConstructor
+        public static class ResponseListVocReparation {
+            private List<VocReparationEntity> data;
+        }
+
+        @Getter
+        @AllArgsConstructor
         public static class ResponseVoc {
-            @ApiParam(value = "청구 금액", required = true, example = "5000")
-            private VocEntity voc;
+            private VocEntity data;
+        }
+
+        @Getter
+        @AllArgsConstructor
+        public static class ResponseVocReparation {
+            private VocReparationEntity data;
         }
 }

@@ -1,7 +1,8 @@
 package com.example.teamfresh.voc.domain.entity;
 
 
-import com.example.teamfresh.voc.common.VocStatus;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,14 +31,17 @@ public class VocEntity {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "status", insertable = false)
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "reason", nullable = false, length = 255)
-    private String reason;
-
     @Column(name = "is_claim", insertable = false)
-    private Short isClaim;
+    private int isClaim;
+
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
+
+    @Column(name = "description", nullable = false, length = 255)
+    private String description;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false, insertable = false)
@@ -51,9 +55,9 @@ public class VocEntity {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "vocId")
-    private List<VocClaimEntity> vocClam = new ArrayList<>();
+    private List<VocPenaltyEntity> vocClam = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vocId")
+    @OneToMany(mappedBy = "voc")
     private List<VocReparationEntity> vocReparation = new ArrayList<>();
 
 //    @Builder

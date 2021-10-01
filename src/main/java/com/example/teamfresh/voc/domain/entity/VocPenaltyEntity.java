@@ -9,22 +9,19 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "voc_claim")
+@Table(name = "voc_penalty")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VocClaimEntity {
+public class VocPenaltyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name="voc_id" , insertable = false , updatable = false)
+    @JoinColumn(name="voc_id" , insertable = false)
     private Long vocId;
-
-    @Column(name = "claim_price", nullable = false)
-    private int claimPrice;
 
     @Column(name = "is_verify", nullable = false, insertable = false)
     private int isVerify;
@@ -35,7 +32,7 @@ public class VocClaimEntity {
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
 
 }
