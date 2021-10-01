@@ -26,6 +26,9 @@ public class VocClaimEntity {
     @Column(name = "claim_price", nullable = false)
     private int claimPrice;
 
+    @Column(name = "is_verify", nullable = false, insertable = false)
+    private int isVerify;
+
     @Column(name = "is_sign", nullable = false, insertable = false)
     private int isSign;
 
