@@ -8,8 +8,10 @@ import com.example.teamfresh.voc.domain.repository.VocRepository;
 import com.example.teamfresh.voc.dto.VocDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -60,6 +62,9 @@ public class VocService {
 
         voc.setIsClaim(1);
         voc.setUpdatedAt(LocalDateTime.now());
+        if(voc.getType().equals("CUSTOMER")){
+            voc.setStatus(VocStatus.COMPLETE.getValue());
+        }
         vocReparationRepository.save(vocReparation);
         vocRepository.save(voc);
 
@@ -70,8 +75,12 @@ public class VocService {
     public Long savePenalty(VocDto.RequestVocPenalty payload){
         VocEntity voc = vocRepository.findById(payload.getVocId()).get();
         VocPenaltyEntity vocPenalty = new VocPenaltyEntity();
-
         vocPenalty.setVocId(voc.getId());
+
+        if(voc.getType().equals("CUSTOMER")){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad Request Voc Type Customer");
+        }
+
         voc.setStatus(VocStatus.PROCEED.getValue());
         voc.setUpdatedAt(LocalDateTime.now());
         vocPenaltyRepository.save(vocPenalty);
@@ -106,24 +115,24 @@ public class VocService {
 
         VocPenaltyEntity vocPenalty = vocPenaltyRepository.findById(id).get();
 
-//        for (String key: payload.keySet() ) {
-//            System.out.println(key + ":" + payload.get(key));
-//            switch (key) {
-//                case "isSign":
-//                    int isSign = Integer.parseInt((String) payload.get(key));
-//                    vocPenalty.setIsSign(isSign);
-//                    break;
-//                case "isVerify":
-//                    int isVerify =  Integer.parseInt((String) payload.get(key));
-//                    vocPenalty.setIsVerify(isVerify);
-//                    break;
-//            }
-//        }
-        vocPenalty.setIsSign(payload.getIsSign());
-        vocPenalty.setIsVerify(payload.getIsVerify());
-        vocPenalty.setUpdatedAt(LocalDateTime.now());
-        vocPenaltyRepository.save(vocPenalty);
+        // 승인 거절 이유가 있는지 체크
+        if(payload.getAnswer() instanceof String){
+            vocPenalty.setAnswer(payload.getAnswer());
+            vocPenalty.setUpdatedAt(LocalDateTime.now());
+            vocPenalty.setIsSign(0);
+            vocPenalty.setIsVerify(1);
+            vocPenaltyRepository.save(vocPenalty);
+            voc.setUpdatedAt(LocalDateTime.now());
+            voc.setStatus(VocStatus.HOLD.getValue());
+            vocRepository.save(voc);
+        } else {
+            vocPenalty.setIsSign(payload.getIsSign());
+            vocPenalty.setIsVerify(payload.getIsVerify());
+            vocPenalty.setUpdatedAt(LocalDateTime.now());
+            vocPenaltyRepository.save(vocPenalty);
+        }
 
+        // 승인과 확인 여부가 1이면 voc 상태를 완료처리한다.
         if(vocPenalty.getIsSign()==1&&vocPenalty.getIsVerify()==1){
             voc.setUpdatedAt(LocalDateTime.now());
             voc.setStatus(VocStatus.COMPLETE.getValue());

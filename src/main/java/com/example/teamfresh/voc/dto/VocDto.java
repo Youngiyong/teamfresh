@@ -46,6 +46,8 @@ public class VocDto {
             private int isVerify;
             @ApiParam(value = "이의 여부", required = true, example = "1")
             private int isSign;
+            @ApiParam(value = "승인 거절 이유", required = false, example = "승일 거절 이유입니다.")
+            private String answer;
        }
 
         @Getter

@@ -29,10 +29,10 @@ public class VocReparationEntity {
     @JoinColumn(name="voc_id")
     private VocEntity voc;
 
-    @Column(name = "name", nullable = true, length = 50)
+    @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "reason", nullable = true, length = 255)
+    @Column(name = "reason", length = 255)
     private String reason;
 
     @Column(name = "penalty_price", nullable = false)
