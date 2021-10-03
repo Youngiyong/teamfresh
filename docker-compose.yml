@@ -17,7 +17,7 @@ services:
   application:
     build: .
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mariadb://localhost:3306/teamfresh?useUnicode=true
+      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/teamfresh?useUnicode=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: qwe123!@#
     ports:
