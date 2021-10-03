@@ -1,2 +1,0 @@
-com/example/teamfresh/TeamfreshApplicationTests.java
- com.example.teamfresh.TeamfreshApplicationTests
