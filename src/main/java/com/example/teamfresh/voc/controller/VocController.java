@@ -1,14 +1,9 @@
 package com.example.teamfresh.voc.controller;
 
 
-import com.example.teamfresh.voc.common.VocStatus;
-import com.example.teamfresh.voc.domain.entity.VocEntity;
 import com.example.teamfresh.voc.dto.VocDto;
 import com.example.teamfresh.voc.service.VocService;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -6,7 +6,6 @@ import com.example.teamfresh.voc.domain.repository.VocPenaltyRepository;
 import com.example.teamfresh.voc.domain.repository.VocReparationRepository;
 import com.example.teamfresh.voc.domain.repository.VocRepository;
 import com.example.teamfresh.voc.dto.VocDto;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class VocService {

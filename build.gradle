@@ -1,7 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.4.11'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -17,7 +16,6 @@ dependencies {
     compile 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.projectlombok:lombok:1.18.20'
     implementation 'org.projectlombok:lombok:1.18.20'
-    implementation 'com.querydsl:querydsl-jpa'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.mariadb.jdbc:mariadb-java-client'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -25,24 +23,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile 'io.springfox:springfox-boot-starter:3.0.0'
 
-}
-def querydslDir = "$buildDir/generated/querydsl"
-
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-
-sourceSets {
-    main.java.srcDir querydslDir
-}
-
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
 }
 test {
     useJUnitPlatform()
