@@ -46,7 +46,7 @@ status : 330(voc 진행 상태)
 배송기사의 패널티 확인 여부 등록
 PUT http://localhost:8088/{vocId}/penalties/{id}
 is_verify : 1
-확인여부, 승인여부, 이의 이유 업데이트 
+확인여부, 승인여부, 승인 거절 사유 업데이트 
 
 승인 거절
 status : 320(voc 홀드 상태)
