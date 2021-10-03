@@ -62,7 +62,7 @@ CREATE TABLE `voc_reparation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 ```
 ## Requirement
-
+```
 VOC 목록 API
 GET http://localhost:8088/vocs
 
