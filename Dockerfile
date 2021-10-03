@@ -1,6 +1,6 @@
-FROM openjdk:8-jdk-alpine
+FROM java:8
 
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=out/artifacts/teamfresh_main_jar/*.jar
 
 COPY ${JAR_FILE} app.jar
 
