@@ -20,19 +20,19 @@ public class VocController {
     @Operation(description = "postVoc")
     @PostMapping("")
     public VocDto.ResponseCreate postVoc(@RequestBody @Valid final VocDto.RequestVoc payload){
-        return new VocDto.ResponseCreate(vocService.save(payload),201, "success");
+        return new VocDto.ResponseCreate(vocService.save(payload),200, "success");
     }
 
     @Operation(description = "postVocReparation")
     @PostMapping("/reparations")
     public VocDto.ResponseCreate postVocReparation(@RequestBody @Valid final VocDto.RequestVocReparation payload){
-        return new VocDto.ResponseCreate(vocService.saveReparation(payload),201, "success");
+        return new VocDto.ResponseCreate(vocService.saveReparation(payload),200, "success");
     }
 
     @Operation(description = "postVocPenalty")
     @PostMapping("/penalties")
     public VocDto.ResponseCreate postVocClaim(@RequestBody @Valid final VocDto.RequestVocPenalty payload){
-        return new VocDto.ResponseCreate(vocService.savePenalty(payload),201, "success");
+        return new VocDto.ResponseCreate(vocService.savePenalty(payload),200, "success");
     }
 
     @Operation(description = "findAllVoc")

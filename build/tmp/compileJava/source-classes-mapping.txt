@@ -24,11 +24,11 @@ com/example/teamfresh/TeamfreshApplication.java
  com.example.teamfresh.TeamfreshApplication
 com/example/teamfresh/voc/domain/repository/VocReparationRepository.java
  com.example.teamfresh.voc.domain.repository.VocReparationRepository
-com/example/teamfresh/voc/controller/VocController.java
- com.example.teamfresh.voc.controller.VocController
+com/example/teamfresh/voc/service/VocService.java
+ com.example.teamfresh.voc.service.VocService
 com/example/teamfresh/voc/domain/entity/VocPenaltyEntity.java
  com.example.teamfresh.voc.domain.entity.VocPenaltyEntity
 com/example/teamfresh/voc/domain/repository/VocRepository.java
  com.example.teamfresh.voc.domain.repository.VocRepository
-com/example/teamfresh/voc/service/VocService.java
- com.example.teamfresh.voc.service.VocService
+com/example/teamfresh/voc/controller/VocController.java
+ com.example.teamfresh.voc.controller.VocController
