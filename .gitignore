@@ -1,5 +1,3 @@
-.gradle
-!gradle/wrapper/gradle-wrapper.jar
 !**/src/test/**/build/
 db
 ### STS ###
