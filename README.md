@@ -21,9 +21,8 @@ docker-compose up
 ```
 
 
-## Workflow
+## Requirement
 ```
-2.요구사항
 1) VOC 목록 API
 GET http://localhost:8088/vocs
 
