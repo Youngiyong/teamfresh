@@ -20,7 +20,7 @@ java 8, docker, docker-compose
 docker-compose up
 ```
 
-
+![Schema](schema.png)
 ## Requirement
 ```
 1) VOC 목록 API
