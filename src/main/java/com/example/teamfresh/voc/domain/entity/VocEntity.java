@@ -55,7 +55,7 @@ public class VocEntity {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "vocId")
-    private List<VocPenaltyEntity> vocClam = new ArrayList<>();
+    private List<VocPenaltyEntity> vocPenalties = new ArrayList<>();
 
     @OneToMany(mappedBy = "voc")
     private List<VocReparationEntity> vocReparation = new ArrayList<>();

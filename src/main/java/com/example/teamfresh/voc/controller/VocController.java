@@ -31,7 +31,7 @@ public class VocController {
 
     @Operation(description = "postVocPenalty")
     @PostMapping("/penalties")
-    public VocDto.ResponseCreate postVocClaim(@RequestBody @Valid final VocDto.RequestVocPenalty payload){
+    public VocDto.ResponseCreate postVocPenalty(@RequestBody @Valid final VocDto.RequestVocPenalty payload){
         return new VocDto.ResponseCreate(vocService.savePenalty(payload),200, "success");
     }
 
