@@ -19,16 +19,15 @@ java 8, docker, docker-compose
 ```bash
 docker-compose up
 ```
-
+## DB Schema
 ![Schema](schema.png)
 ## Requirement
-```
-1) VOC 목록 API
+
+VOC 목록 API
 GET http://localhost:8088/vocs
 
-2) 배상 목록 API
+배상 목록 API
 GET http://localhost:8088/vocs/reparations
-3) 공통
 
 VOC 등록
 POST http://localhost:8088/vocs
@@ -45,7 +44,7 @@ status : 330(voc 진행 상태)
 
 배송기사의 패널티 확인 여부 등록
 PUT http://localhost:8088/{vocId}/penalties/{id}
-is_verify : 1
+
 확인여부, 승인여부, 승인 거절 사유 업데이트 
 
 승인 거절
