@@ -15,20 +15,16 @@ public class VocDto {
 
         @Getter
         public static class RequestVoc {
-            @ApiParam(value = "배송 아이디", required = true, example = "501234")
             @NotEmpty
             private Long deliveryId;
 
-            @ApiParam(value = "배송사", required = true, example = "DRIVER/CUSTOMER")
             @NotEmpty
             private String type;
 
-            @ApiParam(value = "귀책 작성자", required = true, example = "윤기용")
             @NotEmpty
             @NotBlank
             private String name;
 
-            @ApiParam(value = "귀책 내용", required = true, example = "귀책 내용입니다.")
             @NotEmpty
             @NotBlank
             private String description;
@@ -36,51 +32,23 @@ public class VocDto {
 
         @Getter
         public static class RequestVocPenalty {
-            @ApiParam(value = "voc id", required = true, example = "501234")
             private Long vocId;
         }
 
         @Getter
         public static class RequestVocPenaltyUpdate {
-            @ApiParam(value = "확인 여부", required = true, example = "1")
             private int isVerify;
-            @ApiParam(value = "이의 여부", required = true, example = "1")
             private int isSign;
-            @ApiParam(value = "승인 거절 이유", required = false, example = "승일 거절 이유입니다.")
             private String answer;
        }
 
         @Getter
         public static class RequestVocReparation {
-            @ApiParam(value = "voc id", required = true, example = "501234")
-            @NotEmpty
-            @NotBlank
             private Long vocId;
-
-            @ApiParam(value = "배상 책임자", required = true, example = "DRIVER/CUSTOMER")
-            @NotEmpty
-            @NotBlank
             private String name;
-
-            @ApiParam(value = "배상 이유", required = true, example = "배상 이유입니다.")
-            @NotEmpty
-            @NotBlank
             private String reason;
-
-            @ApiParam(value = "배상 금액", required = true, example = "5000")
-            @NotEmpty
-            @NotBlank
             private int penaltyPrice;
         }
-
-//        @Getter
-//        public static class RequestUpdateVocPenalties {
-//            @ApiParam(value = "할인 여부", required = false, example = "1")
-//            private int isVerify;
-//
-//            @ApiParam(value = "승인 여부", required = false, example = "1")
-//            private int isSign;
-//        }
 
         @Getter
         @AllArgsConstructor
